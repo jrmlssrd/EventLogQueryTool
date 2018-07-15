@@ -1,8 +1,9 @@
-﻿using EventLogQueryTool.Model;
+﻿using EventLogQueryToolCore.Model;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Threading;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Services
 {
     public class EventLogReaderManager : IEventLogReaderManager
     {
@@ -28,12 +29,16 @@ namespace EventLogQueryTool.Services
         public IList<EventRecord> ReadLogs(IList<string> serversList, EventLogQueryCriteria criteria)
         {
             EventLogQuery query = new EventLogQuery("Application", PathType.LogName, _eventLogCriteriaConverter.Convert(criteria));
-            IList<EventRecord> returnList = new List<EventRecord>();
-
+            List<EventRecord> returnList = new List<EventRecord>();
+            List<Thread> threadList = new List<Thread>();
             foreach (var server in serversList)
             {
-                _eventLogReaderService.ReadLogs(server, query);
+                var t = new Thread(() => returnList.AddRange(_eventLogReaderService.ReadLogs(server, query)));
+                t.Start();
+                threadList.Add(t);
             }
+
+            threadList.ForEach(x => x.Join());
 
             return returnList;
         }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using EventLogQueryToolCore.Common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Services
 {
     public class EventLogReaderService : IEventLogReaderService
     {
@@ -38,7 +39,7 @@ namespace EventLogQueryTool.Services
             }
             catch (Exception ex)
             {
-                _exceptionManager.Notify(ex);
+                _exceptionManager.Raise(ex);
             }
 
             return eventRecords;

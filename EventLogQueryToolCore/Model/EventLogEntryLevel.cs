@@ -1,4 +1,4 @@
-﻿namespace EventLogQueryTool.Model
+﻿namespace EventLogQueryToolCore.Model
 {
     public enum EventLogEntryLevel
     {

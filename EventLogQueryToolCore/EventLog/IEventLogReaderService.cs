@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Services
 {
     public interface IEventLogReaderService
     {

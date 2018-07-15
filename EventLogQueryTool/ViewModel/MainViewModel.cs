@@ -1,4 +1,4 @@
-﻿using EventLogQueryTool.Services;
+﻿using EventLogQueryToolCore.Services;
 using GalaSoft.MvvmLight;
 
 namespace EventLogQueryTool.ViewModel

@@ -1,10 +1,10 @@
-﻿using EventLogQueryTool.Model;
+﻿using EventLogQueryToolCore.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Services
 {
     public class EventLogCriteriaConverter : IEventLogCriteriaConverter
     {

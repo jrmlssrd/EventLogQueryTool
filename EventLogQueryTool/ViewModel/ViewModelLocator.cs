@@ -11,8 +11,8 @@
 
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
+using CommonServiceLocator;
 using EventLogQueryTool.Bootstrap;
-using Microsoft.Practices.ServiceLocation;
 
 namespace EventLogQueryTool.ViewModel
 {

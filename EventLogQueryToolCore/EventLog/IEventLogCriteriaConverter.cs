@@ -1,6 +1,6 @@
-﻿using EventLogQueryTool.Model;
+﻿using EventLogQueryToolCore.Model;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Services
 {
     public interface IEventLogCriteriaConverter
     {

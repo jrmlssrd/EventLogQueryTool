@@ -1,17 +1,13 @@
-﻿using EventLogQueryTool.Services;
+﻿using EventLogQueryToolCore.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EventLogQueryTool.Test
+namespace EventLogQueryToolCore.Test
 {
     internal class ExceptionManagerMock : IExceptionManager
     {
         #region Public Methods
 
-        public void Notify(Exception exception)
+        public void Raise(Exception exception)
         {
             throw exception;
         }
