@@ -41,8 +41,6 @@ namespace EventLogQueryTool.Test
                         "    </Select>" +
                         "  </Query>" +
                         "</QueryList>";
-            var crit = new EventLogQueryCriteria();
-            crit.EventLogEntryTypeList.Add(EventLogEntryLevel.Error);
             var r = eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, query));
             Assert.IsNotNull(thrownException);
         }
