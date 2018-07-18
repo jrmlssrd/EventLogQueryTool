@@ -22,5 +22,17 @@ namespace EventLogQueryTool.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerConfiguration {
+            get {
+                return ((string)(this["ServerConfiguration"]));
+            }
+            set {
+                this["ServerConfiguration"] = value;
+            }
+        }
     }
 }

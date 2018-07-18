@@ -13,6 +13,7 @@ namespace EventLogQueryTool
         static App()
         {
             DispatcherHelper.Initialize();
+            var c = System.Threading.Thread.CurrentThread.CurrentUICulture;
         }
 
         #endregion Public Constructors

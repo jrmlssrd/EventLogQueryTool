@@ -1,7 +1,5 @@
-﻿using EventLogQueryToolCore.Common;
-using EventLogQueryToolCore.Model;
+﻿using EventLogQueryToolCore.Model;
 using EventLogQueryToolCore.Services;
-using EventLogQueryToolCore.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics.Eventing.Reader;

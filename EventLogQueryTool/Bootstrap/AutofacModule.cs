@@ -13,6 +13,8 @@ namespace EventLogQueryTool.Bootstrap
         {
             builder.RegisterType<EventLogReaderManager>().As<IEventLogReaderManager>();
             builder.RegisterType<EventLogReaderService>().As<IEventLogReaderService>();
+            builder.RegisterType<ServerConfigurationXMLConverter>().As<IServerConfigurationConverter>();
+            builder.RegisterType<ServerConfigurationManager>().As<IServerConfigurationManager>();
             builder.RegisterType<EventLogCriteriaConverter>().As<IEventLogCriteriaConverter>();
             builder.RegisterType<UIExceptionManager>().As<IExceptionManager>();
         }

@@ -1,20 +1,27 @@
-﻿using System;
+﻿using EventLogQueryToolCore.Common;
+using System;
 using System.Windows;
-using EventLogQueryToolCore.Common;
 
 namespace EventLogQueryTool.Services
 {
-    class UIExceptionManager : IExceptionManager
+    internal class UIExceptionManager : IExceptionManager
     {
+        #region Public Constructors
 
         public UIExceptionManager()
-        { 
+        {
             // Popup manager
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public void Raise(Exception exception)
         {
             MessageBox.Show(exception.ToString());
         }
+
+        #endregion Public Methods
     }
 }
