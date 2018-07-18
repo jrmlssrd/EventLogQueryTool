@@ -1,16 +1,16 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("EventLogQueryTool.Test")]
+[assembly: AssemblyTitle("EventLogQueryToolCore.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EventLogQueryTool.Test")]
+[assembly: AssemblyProduct("EventLogQueryToolCore.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("f2c81fa9-4997-479a-81c8-1cdbfd33b858")]
+[assembly: Guid("d10ea341-06ee-4b69-b066-542890127367")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

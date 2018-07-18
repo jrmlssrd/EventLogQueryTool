@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LBL_DATAFROM" xml:space="preserve">
-    <value>From</value>
+  <data name="LBL_ERROR" xml:space="preserve">
+    <value>Error</value>
   </data>
-  <data name="LBL_DATATO" xml:space="preserve">
-    <value>To</value>
+  <data name="LBL_INFORMATION" xml:space="preserve">
+    <value>Information</value>
   </data>
-  <data name="LBL_SEARCH" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="LBL_SERVER_SELECTION" xml:space="preserve">
-    <value>Servers selection</value>
+  <data name="LBL_WARNING" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

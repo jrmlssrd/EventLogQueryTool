@@ -1,10 +1,11 @@
-﻿using EventLogQueryTool.Model;
-using EventLogQueryTool.Services;
+﻿using EventLogQueryToolCore.Model;
+using EventLogQueryToolCore.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 
-namespace EventLogQueryTool.Test
+namespace EventLogQueryToolCore.Test
 {
     [TestClass]
     public class EventLogCriteriaConverterTest
@@ -26,6 +27,7 @@ namespace EventLogQueryTool.Test
             criteria.DateFrom = DateTime.Now.AddMinutes(-10);
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
             var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            Assert.IsTrue(r.All(x => x.TimeCreated >= criteria.DateFrom));
         }
 
         [TestMethod]

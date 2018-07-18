@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using EventLogQueryTool.Services;
+using EventLogQueryToolCore.Common;
+using EventLogQueryToolCore.Services;
 
 namespace EventLogQueryTool.Bootstrap
 {
@@ -10,9 +12,11 @@ namespace EventLogQueryTool.Bootstrap
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<EventLogReaderManager>().As<IEventLogReaderManager>();
-            builder.RegisterType<EventLogCriteriaConverter>().As<IEventLogCriteriaConverter>();
             builder.RegisterType<EventLogReaderService>().As<IEventLogReaderService>();
-            builder.RegisterType<ExceptionManager>().As<IExceptionManager>();
+            builder.RegisterType<ServerConfigurationXMLConverter>().As<IServerConfigurationConverter>();
+            builder.RegisterType<ServerConfigurationManager>().As<IServerConfigurationManager>();
+            builder.RegisterType<EventLogCriteriaConverter>().As<IEventLogCriteriaConverter>();
+            builder.RegisterType<UIExceptionManager>().As<IExceptionManager>();
         }
 
         #endregion Protected Methods

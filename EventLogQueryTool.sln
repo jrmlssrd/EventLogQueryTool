@@ -5,7 +5,11 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogQueryTool", "EventLogQueryTool\EventLogQueryTool.csproj", "{128A40DF-2E7E-4B82-AE98-B9FA8B6045E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogQueryTool.Test", "EventLogQueryTool.Test\EventLogQueryTool.Test.csproj", "{D10EA341-06EE-4B69-B066-542890127367}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogQueryToolCore", "EventLogQueryToolCore\EventLogQueryToolCore.csproj", "{80F6C622-177D-41E9-A25D-E995F2D342F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogQueryToolCore.Test", "EventLogQueryToolCore.Test\EventLogQueryToolCore.Test.csproj", "{D10EA341-06EE-4B69-B066-542890127367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogQueryTool.Test", "EventLogQueryTool.Test\EventLogQueryTool.Test.csproj", "{F2C81FA9-4997-479A-81C8-1CDBFD33B858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,18 @@ Global
 		{128A40DF-2E7E-4B82-AE98-B9FA8B6045E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{128A40DF-2E7E-4B82-AE98-B9FA8B6045E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{128A40DF-2E7E-4B82-AE98-B9FA8B6045E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F6C622-177D-41E9-A25D-E995F2D342F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F6C622-177D-41E9-A25D-E995F2D342F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F6C622-177D-41E9-A25D-E995F2D342F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F6C622-177D-41E9-A25D-E995F2D342F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D10EA341-06EE-4B69-B066-542890127367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D10EA341-06EE-4B69-B066-542890127367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D10EA341-06EE-4B69-B066-542890127367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D10EA341-06EE-4B69-B066-542890127367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C81FA9-4997-479A-81C8-1CDBFD33B858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C81FA9-4997-479A-81C8-1CDBFD33B858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C81FA9-4997-479A-81C8-1CDBFD33B858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C81FA9-4997-479A-81C8-1CDBFD33B858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

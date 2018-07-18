@@ -1,11 +1,11 @@
-﻿using EventLogQueryTool.Model;
-using EventLogQueryTool.Services;
+﻿using EventLogQueryToolCore.Common;
+using EventLogQueryToolCore.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Diagnostics.Eventing.Reader;
 
-namespace EventLogQueryTool.Test
+namespace EventLogQueryToolCore.Test
 {
     [TestClass]
     public class EventLogReaderServiceTest
@@ -24,7 +24,7 @@ namespace EventLogQueryTool.Test
         public void TestInit()
         {
             var exceptionManagerMock = new Mock<IExceptionManager>();
-            exceptionManagerMock.Setup(x => x.Notify(thrownException));
+            exceptionManagerMock.Setup(x => x.Raise(thrownException));
             exceptionManager = exceptionManagerMock.Object;
             eventLogReaderService = new EventLogReaderService(exceptionManager);
             thrownException = null;
@@ -34,13 +34,13 @@ namespace EventLogQueryTool.Test
         public void TestMethod1()
         {
             var query = "<QueryList>" +
-                        "  <Query Id=\"0\">" +
-                        "    <Select>" +
-                        "        *[System[((Level = 4) or (Level = 3)) " +
-                        "          and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
-                        "    </Select>" +
-                        "  </Query>" +
-                        "</QueryList>";
+                         "  <Query Id=\"0\">" +
+                         "    <Select>" +
+                         "        *[System[((Level = 4) or (Level = 3)) " +
+                         "          and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
+                         "    </Select>" +
+                         "  </Query>" +
+                         "</QueryList>";
             var r = eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, query));
             Assert.IsNotNull(thrownException);
         }

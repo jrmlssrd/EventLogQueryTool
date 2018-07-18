@@ -11,8 +11,8 @@
 
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
+using CommonServiceLocator;
 using EventLogQueryTool.Bootstrap;
-using Microsoft.Practices.ServiceLocation;
 
 namespace EventLogQueryTool.ViewModel
 {
@@ -39,6 +39,8 @@ namespace EventLogQueryTool.ViewModel
 
         #region Public Properties
 
+        public EventLogViewModel EventLogWindow => ServiceLocator.Current.GetInstance<EventLogViewModel>();
+
         /// <summary>
         /// Gets the Main property.
         /// </summary>
@@ -62,7 +64,8 @@ namespace EventLogQueryTool.ViewModel
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AutofacModule>();
-            builder.RegisterType<MainViewModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<MainViewModel>().AsSelf().InstancePerDependency();
+            builder.RegisterType<EventLogViewModel>().AsSelf().InstancePerDependency();
             var container = builder.Build();
 
             ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));

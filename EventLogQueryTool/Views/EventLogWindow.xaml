@@ -1,0 +1,50 @@
+﻿<Window x:Class="EventLogQueryTool.Views.EventLogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ewt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:mod="clr-namespace:EventLogQueryToolCore.Model;assembly=EventLogQueryToolCore"
+        xmlns:lbl="clr-namespace:EventLogQueryTool.Properties"
+        xmlns:com="clr-namespace:EventLogQueryTool.Common"
+        mc:Ignorable="d"
+        Title="EventLogWindow"
+        DataContext="{Binding EventLogWindow, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Search criteria" MinWidth="180">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="{x:Static lbl:Resources.LBL_DATAFROM}" />
+                    <ewt:DateTimePicker Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="{x:Static lbl:Resources.LBL_DATATO}" />
+                    <ewt:DateTimePicker Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label>Entry type</Label>
+                    <ewt:CheckComboBox ItemsSource="{Binding Source={com:EnumBindingSource {x:Type mod:EventLogEntryLevel}}}"
+                                       SelectedItemsOverride="{Binding SelectedEntryTypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">
+                        <StackPanel Orientation="Vertical">
+                            <Label>Selected servers</Label>
+                            <ListView ItemsSource="{Binding SelectedServerList}" Height="150" />
+                            <Button Content="Select servers" />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}"></Button>
+    </Grid>
+</Window>

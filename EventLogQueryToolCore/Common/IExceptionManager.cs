@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Common
 {
     public interface IExceptionManager
     {
         #region Public Methods
 
-        void Notify(Exception exception);
+        void Raise(Exception exception);
 
         #endregion Public Methods
     }

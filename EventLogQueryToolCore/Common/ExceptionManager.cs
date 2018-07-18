@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace EventLogQueryTool.Services
+namespace EventLogQueryToolCore.Common
 {
     public class ExceptionManager : IExceptionManager
     {
         #region Public Methods
 
-        public void Notify(Exception exception)
+        public void Raise(Exception exception)
         {
-            Console.WriteLine(exception.ToString());
+            throw exception;
         }
 
         #endregion Public Methods

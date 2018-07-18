@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventLogQueryTool.Model
+namespace EventLogQueryToolCore.Model
 {
     /// <summary>
     /// Criteria object

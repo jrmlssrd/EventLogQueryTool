@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EventLogQueryTool.Properties {
+namespace EventLogQueryToolCore.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EventLogQueryTool.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EventLogQueryTool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EventLogQueryToolCore.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,29 @@ namespace EventLogQueryTool.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à From.
+        ///   Recherche une chaîne localisée semblable à Error.
         /// </summary>
-        public static string LBL_DATAFROM {
+        public static string LBL_ERROR {
             get {
-                return ResourceManager.GetString("LBL_DATAFROM", resourceCulture);
+                return ResourceManager.GetString("LBL_ERROR", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à To.
+        ///   Recherche une chaîne localisée semblable à Information.
         /// </summary>
-        public static string LBL_DATATO {
+        public static string LBL_INFORMATION {
             get {
-                return ResourceManager.GetString("LBL_DATATO", resourceCulture);
+                return ResourceManager.GetString("LBL_INFORMATION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Search.
+        ///   Recherche une chaîne localisée semblable à Warning.
         /// </summary>
-        public static string LBL_SEARCH {
+        public static string LBL_WARNING {
             get {
-                return ResourceManager.GetString("LBL_SEARCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Servers selection.
-        /// </summary>
-        public static string LBL_SERVER_SELECTION {
-            get {
-                return ResourceManager.GetString("LBL_SERVER_SELECTION", resourceCulture);
+                return ResourceManager.GetString("LBL_WARNING", resourceCulture);
             }
         }
     }
