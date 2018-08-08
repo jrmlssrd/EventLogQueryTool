@@ -47,6 +47,15 @@ namespace EventLogQueryToolCore.Test
             var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
         }
 
+        [TestMethod]
+        public void ProviderOnly()
+        {
+            var criteria = new EventLogQueryCriteria();
+            criteria.ProviderName = "RFP";
+            var queryString = _eventLogCriteriaConverter.Convert(criteria);
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+        }
+
         [TestInitialize]
         public void TestInit()
         {

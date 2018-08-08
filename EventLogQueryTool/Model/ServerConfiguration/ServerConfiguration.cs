@@ -1,10 +1,14 @@
-﻿namespace EventLogQueryTool.Model
+﻿using System;
+using System.Collections.Generic;
+
+namespace EventLogQueryTool.Model
 {
+    [Serializable]
     public class ServerConfiguration
     {
         #region Public Properties
 
-        public ServerCategory[] CategoryList { get; set; }
+        public List<ServerCategory> CategoryList { get; set; }
 
         #endregion Public Properties
     }

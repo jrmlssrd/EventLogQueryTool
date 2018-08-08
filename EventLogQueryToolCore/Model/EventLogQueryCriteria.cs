@@ -27,6 +27,7 @@ namespace EventLogQueryToolCore.Model
         public IList<EventLogEntryLevel> EventLogEntryTypeList { get; set; }
 
         public IList<string> ServersList { get; set; }
+        public string ProviderName { get; set; }
 
         #endregion Public Properties
     }

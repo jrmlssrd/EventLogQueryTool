@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
+using System.Linq;
 
 namespace EventLogQueryToolCore.Services
 {
@@ -39,6 +40,8 @@ namespace EventLogQueryToolCore.Services
             }
 
             threadList.ForEach(x => x.Join());
+
+            returnList = returnList.OrderBy(x => x.TimeCreated).ToList();
 
             return returnList;
         }

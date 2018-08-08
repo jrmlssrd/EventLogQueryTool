@@ -35,25 +35,9 @@ namespace EventLogQueryToolCore.Test
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void CheckChargeOnLocalhost()
         {
             var serversList = new List<string>();
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
-            serversList.Add("localhost");
             serversList.Add("localhost");
             serversList.Add("localhost");
             serversList.Add("localhost");
@@ -63,13 +47,6 @@ namespace EventLogQueryToolCore.Test
             var crit = new EventLogQueryCriteria();
 
             var r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
-            r = eventLogReaderManager.ReadLogs(serversList, crit);
             r = eventLogReaderManager.ReadLogs(serversList, crit);
             r = eventLogReaderManager.ReadLogs(serversList, crit);
             r = eventLogReaderManager.ReadLogs(serversList, crit);

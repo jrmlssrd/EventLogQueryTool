@@ -1,17 +1,22 @@
 ﻿using EventLogQueryTool.Model;
 using EventLogQueryTool.Services;
+using EventLogQueryTool.Views;
 using EventLogQueryToolCore.Model;
 using EventLogQueryToolCore.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace EventLogQueryTool.ViewModel
 {
     public class EventLogViewModel : ViewModelBase
     {
+
         #region Private Fields
 
         private readonly IEventLogReaderManager _eventLogReaderManager;
@@ -21,9 +26,10 @@ namespace EventLogQueryTool.ViewModel
 
         private DateTime? _dateTo;
 
+        private ICommand _editConfigCommand;
+        private string _providerName;
         private ICommand _searchCommand;
 
-        //private ObservableCollection<string> _entryTypeList = new ObservableCollection<string>();
         private ObservableCollection<EventLogEntryLevel> _selectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
 
         #endregion Private Fields
@@ -35,12 +41,13 @@ namespace EventLogQueryTool.ViewModel
         /// </summary>
         public EventLogViewModel(IEventLogReaderManager eventLogReaderManager, IServerConfigurationManager serverConfigurationManager)
         {
+            _eventLogReaderManager = eventLogReaderManager;
+            _serverConfigurationManager = serverConfigurationManager;
+
             InitViewModelData();
 
             _searchCommand = new RelayCommand(ExecuteSearch);
-
-            _eventLogReaderManager = eventLogReaderManager;
-            _serverConfigurationManager = serverConfigurationManager;
+            _editConfigCommand = new RelayCommand(ExecuteEditConfig);
         }
 
         #endregion Public Constructors
@@ -49,7 +56,10 @@ namespace EventLogQueryTool.ViewModel
 
         public DateTime? DateFrom
         {
-            get { return _dateFrom; }
+            get
+            {
+                return _dateFrom;
+            }
 
             set
             {
@@ -60,7 +70,10 @@ namespace EventLogQueryTool.ViewModel
 
         public DateTime? DateTo
         {
-            get { return _dateTo; }
+            get
+            {
+                return _dateTo;
+            }
 
             set
             {
@@ -69,7 +82,28 @@ namespace EventLogQueryTool.ViewModel
             }
         }
 
+        public ICommand EditConfigCommand
+        {
+            get { return _editConfigCommand; }
+            set { _editConfigCommand = value; }
+        }
+
+        public ObservableCollection<Event> EventResultList { get; set; } = new ObservableCollection<Event>();
+
         public ICommand OpenEventLogCommand { get; set; }
+
+        public string ProviderName
+        {
+            get
+            {
+                return _providerName;
+            }
+            set
+            {
+                _providerName = value;
+                RaisePropertyChanged("ProviderName");
+            }
+        }
 
         public ICommand SearchCommand
         {
@@ -77,9 +111,14 @@ namespace EventLogQueryTool.ViewModel
             set { _searchCommand = value; }
         }
 
+        public List<ServerCategory> SelectedCategories { get; set; }
+
         public ObservableCollection<EventLogEntryLevel> SelectedEntryTypeList
         {
-            get { return _selectedEntryTypeList; }
+            get
+            {
+                return _selectedEntryTypeList;
+            }
 
             set
             {
@@ -94,15 +133,38 @@ namespace EventLogQueryTool.ViewModel
 
         #region Public Methods
 
+        public void ExecuteEditConfig()
+        {
+            ServerConfigurationEditor editor = new Views.ServerConfigurationEditor();
+            editor.ShowDialog();
+            InitViewModelData();
+        }
+
         public void ExecuteSearch()
         {
             var crit = new EventLogQueryCriteria()
             {
+                ProviderName = ProviderName,
                 DateFrom = DateFrom,
                 DateTo = DateTo,
                 EventLogEntryTypeList = SelectedEntryTypeList
             };
-            var logs = _eventLogReaderManager.ReadLogs("localhost", crit);
+
+            if (SelectedCategories != null && SelectedCategories.Any())
+            {
+                var logs = _eventLogReaderManager.ReadLogs(SelectedCategories.SelectMany(x => x.ServerList).Select(x => x.Name).ToArray(), crit);
+
+                if (logs != null && logs.Any())
+                {
+                    EventResultList = new ObservableCollection<Event>(logs.Select(x => new Event(x)).ToList());
+                }
+                else
+                {
+                    EventResultList = new ObservableCollection<Event>();
+                    MessageBox.Show("No events found with the current criteria");
+                }
+                RaisePropertyChanged("EventResultList");
+            }
         }
 
         #endregion Public Methods
@@ -112,10 +174,11 @@ namespace EventLogQueryTool.ViewModel
         private void InitViewModelData()
         {
             // Inititiaze default selected entry level
-            _selectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
-            _selectedEntryTypeList.Add(EventLogEntryLevel.Error);
-            _selectedEntryTypeList.Add(EventLogEntryLevel.Warning);
-            _selectedEntryTypeList.Add(EventLogEntryLevel.Information);
+            SelectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
+            SelectedEntryTypeList.Add(EventLogEntryLevel.Error);
+            SelectedEntryTypeList.Add(EventLogEntryLevel.Warning);
+            SelectedEntryTypeList.Add(EventLogEntryLevel.Information);
+            RaisePropertyChanged("SelectedEntryTypeList");
 
             // Initialize current server configuration
             ServerConfiguration = _serverConfigurationManager.LoadConfiguration();
@@ -126,8 +189,11 @@ namespace EventLogQueryTool.ViewModel
                 _serverConfigurationManager.InitializeConfiguration();
                 ServerConfiguration = _serverConfigurationManager.LoadConfiguration();
             }
+
+            DateFrom = DateTime.Now.AddHours(-24);
         }
 
         #endregion Private Methods
+
     }
 }

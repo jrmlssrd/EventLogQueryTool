@@ -1,5 +1,8 @@
-﻿namespace EventLogQueryTool.Model
+﻿using System;
+
+namespace EventLogQueryTool.Model
 {
+    [Serializable]
     public class Server
     {
         #region Public Properties

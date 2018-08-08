@@ -35,16 +35,28 @@ namespace EventLogQueryToolCore.Services
             var criteriaList = new List<string>();
             AddEventLogLevelCriteria(eventLogQueryCriteria, criteriaList);
             AddEventLogDateCriteria(eventLogQueryCriteria, criteriaList);
+            AddEventLogProviderNameCriteria(eventLogQueryCriteria, criteriaList);
 
             if (criteriaList.Any())
             {
                 queryString.Append("[");
-                queryString.Append(String.Join(AND, criteriaList));
+                queryString.Append(string.Join(AND, criteriaList));
                 queryString.Append("]");
             }
             queryString.Append("]");
 
             return string.Concat(QUERY_BEGIN, queryString.ToString(), QUERY_ENDING);
+        }
+
+        private static void AddEventLogProviderNameCriteria(EventLogQueryCriteria eventLogQueryCriteria, List<string> criteriaList)
+        {
+            if (!string.IsNullOrWhiteSpace(eventLogQueryCriteria.ProviderName))
+            {
+                var crit = "(";
+                crit += string.Format("(Provider[@Name = '{0}'])", eventLogQueryCriteria.ProviderName);
+                crit += ")";
+                criteriaList.Add(crit);
+            }
         }
 
         #endregion Public Methods

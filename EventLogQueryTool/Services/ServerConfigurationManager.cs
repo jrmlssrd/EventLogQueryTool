@@ -1,4 +1,5 @@
 ﻿using EventLogQueryTool.Model;
+using System.Collections.Generic;
 
 namespace EventLogQueryTool.Services
 {
@@ -32,11 +33,11 @@ namespace EventLogQueryTool.Services
         {
             var defaultConfig = new ServerConfiguration()
             {
-                CategoryList = new[]
+                CategoryList = new List<ServerCategory>()
                 {
                     new ServerCategory()
                     {
-                        ServerList = new []
+                        ServerList = new List<Server>()
                         {
                             new Server()
                             {

@@ -41,6 +41,8 @@ namespace EventLogQueryTool.ViewModel
 
         public EventLogViewModel EventLogWindow => ServiceLocator.Current.GetInstance<EventLogViewModel>();
 
+        public ServerConfigurationViewModel ServerConfigurationEditorWindow => ServiceLocator.Current.GetInstance<ServerConfigurationViewModel>();
+
         /// <summary>
         /// Gets the Main property.
         /// </summary>
@@ -66,6 +68,7 @@ namespace EventLogQueryTool.ViewModel
             builder.RegisterModule<AutofacModule>();
             builder.RegisterType<MainViewModel>().AsSelf().InstancePerDependency();
             builder.RegisterType<EventLogViewModel>().AsSelf().InstancePerDependency();
+            builder.RegisterType<ServerConfigurationViewModel>().AsSelf().InstancePerDependency();
             var container = builder.Build();
 
             ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));

@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ewt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:ewtg="http://schemas.xceed.com/wpf/xaml/datagrid"
         xmlns:mod="clr-namespace:EventLogQueryToolCore.Model;assembly=EventLogQueryToolCore"
         xmlns:lbl="clr-namespace:EventLogQueryTool.Properties"
         xmlns:com="clr-namespace:EventLogQueryTool.Common"
         mc:Ignorable="d"
         Title="EventLogWindow"
         DataContext="{Binding EventLogWindow, Source={StaticResource Locator}}">
+  
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -35,16 +37,29 @@
                                        SelectedItemsOverride="{Binding SelectedEntryTypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
+                    <Label>Source</Label>
+                    <TextBox Text="{Binding ProviderName}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
                     <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">
                         <StackPanel Orientation="Vertical">
                             <Label>Selected servers</Label>
-                            <ListView ItemsSource="{Binding SelectedServerList}" Height="150" />
-                            <Button Content="Select servers" />
+                            <ListBox x:Name="categoryList" ItemsSource="{Binding ServerConfiguration.CategoryList}" DisplayMemberPath="CategoryName" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Multiple" Height="150" />
+                            <Button Content="Edit configuration" Command="{Binding EditConfigCommand}" />
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
         <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}"></Button>
+        <ewtg:DataGridControl Grid.Column="1" Grid.RowSpan="2" AutoCreateColumns="False" ItemsSource="{Binding EventResultList, UpdateSourceTrigger=PropertyChanged}">
+            <ewtg:DataGridControl.Columns>
+                <ewtg:Column Title="Level" FieldName="EventRecord.LevelDisplayName" />
+                <ewtg:Column Title="Machine" FieldName="EventRecord.MachineName" />
+                <ewtg:Column Title="Time" FieldName="EventRecord.TimeCreated" />
+                <ewtg:Column Title="Source" FieldName="EventRecord.ProviderName" />
+                <ewtg:Column Title="Description" FieldName="Description" />
+            </ewtg:DataGridControl.Columns>
+        </ewtg:DataGridControl>
     </Grid>
 </Window>

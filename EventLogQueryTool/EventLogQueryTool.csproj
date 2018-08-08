@@ -112,6 +112,7 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrap\AutofacModule.cs" />
     <Compile Include="Common\EnumBindingSourceExtension.cs" />
+    <Compile Include="Model\Event\Event.cs" />
     <Compile Include="Model\ServerConfiguration\ServerConfiguration.cs" />
     <Compile Include="Model\ServerConfiguration\Server.cs" />
     <Compile Include="Model\ServerConfiguration\ServerCategory.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Services\IServerConfigurationManager.cs" />
     <Compile Include="Services\ServerConfigurationManager.cs" />
     <Compile Include="Services\UIExceptionManager.cs" />
+    <Compile Include="ViewModel\ServerConfigurationViewModel.cs" />
     <Compile Include="ViewModel\EventLogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -138,6 +140,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\ServerConfigurationEditor.xaml.cs">
+      <DependentUpon>ServerConfigurationEditor.xaml</DependentUpon>
+    </Compile>
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServerConfigurationEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

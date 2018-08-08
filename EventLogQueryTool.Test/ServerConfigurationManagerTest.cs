@@ -1,6 +1,7 @@
 ﻿using EventLogQueryTool.Model;
 using EventLogQueryTool.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EventLogQueryTool.Test
@@ -10,7 +11,7 @@ namespace EventLogQueryTool.Test
     {
         #region Private Fields
 
-        private ServerConfigurationManager manager;
+        private ServerConfigurationManager _manager;
 
         #endregion Private Fields
 
@@ -20,44 +21,44 @@ namespace EventLogQueryTool.Test
         public void DeleteConfiguration_SetDefaultConfigThenDelete_ConfigIsNullWhenLoaded()
         {
             // Load initial test config (should be null)
-            var config = manager.LoadConfiguration();
+            var config = _manager.LoadConfiguration();
             Assert.IsNull(config);
 
             // Set the default configuration (localhost only)
-            manager.InitializeConfiguration();
+            _manager.InitializeConfiguration();
 
             // Load the configuration (should be the default config with only localhost)
-            var loadedConfig = manager.LoadConfiguration();
+            var loadedConfig = _manager.LoadConfiguration();
             Assert.IsNotNull(loadedConfig);
             Assert.IsTrue(loadedConfig.CategoryList.First().ServerList.First().Name.Equals("localhost"));
 
             // Delete the configuration
-            manager.DeleteConfiguration();
+            _manager.DeleteConfiguration();
 
             // Load the configuration (should be null)
-            var loadedConfig2 = manager.LoadConfiguration();
+            var loadedConfig2 = _manager.LoadConfiguration();
             Assert.IsNull(loadedConfig2);
         }
 
         [TestInitialize]
         public void Init()
         {
-            manager = new ServerConfigurationManager();
-            manager.DeleteConfiguration();
+            _manager = new ServerConfigurationManager(new ServerConfigurationXMLConverter());
+            _manager.DeleteConfiguration();
         }
 
         [TestMethod]
         public void InitializeConfiguration_SetDefaultConfig_LoadedConfigIsDefault()
         {
             // Load initial test config (should be null)
-            var config = manager.LoadConfiguration();
+            var config = _manager.LoadConfiguration();
             Assert.IsNull(config);
 
             // Set the default configuration (localhost only)
-            manager.InitializeConfiguration();
+            _manager.InitializeConfiguration();
 
             // Load the configuration (should be the default config with only localhost)
-            var loadedConfig = manager.LoadConfiguration();
+            var loadedConfig = _manager.LoadConfiguration();
             Assert.IsNotNull(loadedConfig);
             Assert.IsTrue(loadedConfig.CategoryList.First().ServerList.First().Name.Equals("localhost"));
         }
@@ -66,7 +67,7 @@ namespace EventLogQueryTool.Test
         public void LoadConfiguration_NoSavedConfiguration_ConfigIsNull()
         {
             // Load the inital test configuration, should be null
-            var config = manager.LoadConfiguration();
+            var config = _manager.LoadConfiguration();
             Assert.IsNull(config);
         }
 
@@ -76,11 +77,11 @@ namespace EventLogQueryTool.Test
             // Define the configuration we want to write.
             var config = new ServerConfiguration()
             {
-                CategoryList = new[]
+                CategoryList = new List<ServerCategory>()
                 {
                     new ServerCategory()
                     {
-                        ServerList = new []
+                        ServerList = new List<Server>()
                         {
                             new Server()
                             {
@@ -90,10 +91,10 @@ namespace EventLogQueryTool.Test
                     }
                 }
             };
-            manager.WriteConfiguration(config);
+            _manager.WriteConfiguration(config);
 
             // Load the last writen configuration
-            var loadedConfig = manager.LoadConfiguration();
+            var loadedConfig = _manager.LoadConfiguration();
             Assert.IsNotNull(loadedConfig);
             Assert.IsTrue(loadedConfig.CategoryList.First().ServerList.First().Name.Equals("testserver1"));
         }
