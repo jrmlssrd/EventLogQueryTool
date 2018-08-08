@@ -1,8 +1,8 @@
 ﻿using EventLogQueryToolCore.Model;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
-using System.Threading;
 using System.Linq;
+using System.Threading;
 
 namespace EventLogQueryToolCore.Services
 {

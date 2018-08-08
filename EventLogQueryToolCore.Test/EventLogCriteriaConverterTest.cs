@@ -10,6 +10,7 @@ namespace EventLogQueryToolCore.Test
     [TestClass]
     public class EventLogCriteriaConverterTest
     {
+
         #region Private Fields
 
         private IEventLogCriteriaConverter _eventLogCriteriaConverter;
@@ -64,5 +65,6 @@ namespace EventLogQueryToolCore.Test
         }
 
         #endregion Public Methods
+
     }
 }

@@ -8,6 +8,7 @@ namespace EventLogQueryTool.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+
         #region Private Fields
 
         private readonly IEventLogReaderManager _eventLogReaderManager;
@@ -42,5 +43,6 @@ namespace EventLogQueryTool.ViewModel
         }
 
         #endregion Private Methods
+
     }
 }

@@ -8,6 +8,7 @@ namespace EventLogQueryToolCore.Model
     /// </summary>
     public class EventLogQueryCriteria
     {
+
         #region Public Constructors
 
         public EventLogQueryCriteria()
@@ -26,9 +27,11 @@ namespace EventLogQueryToolCore.Model
 
         public IList<EventLogEntryLevel> EventLogEntryTypeList { get; set; }
 
-        public IList<string> ServersList { get; set; }
         public string ProviderName { get; set; }
 
+        public IList<string> ServersList { get; set; }
+
         #endregion Public Properties
+
     }
 }

@@ -12,13 +12,13 @@
         DataContext="{Binding ServerConfigurationEditorWindow, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid  Width="Auto" 
+        <xctk:PropertyGrid  Width="Auto"
                             Margin="10"
-                            AutoGenerateProperties="True" 
+                            AutoGenerateProperties="True"
                             SelectedObject="{Binding ServerConfiguration,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="1"  Content="Save configuration" Command="{Binding SaveConfigCommand}" IsDefault="True"/>
+        <Button Grid.Row="1"  Content="Save configuration" Command="{Binding SaveConfigCommand}" IsDefault="True" />
     </Grid>
 </Window>

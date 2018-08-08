@@ -28,7 +28,10 @@ namespace EventLogQueryTool.Common
 
         public Type EnumType
         {
-            get { return this._enumType; }
+            get
+            {
+                return this._enumType;
+            }
 
             set
             {

@@ -8,6 +8,7 @@ namespace EventLogQueryToolCore.Services
 {
     public class EventLogCriteriaConverter : IEventLogCriteriaConverter
     {
+
         #region Private Fields
 
         private const string AND = " and ";
@@ -46,17 +47,6 @@ namespace EventLogQueryToolCore.Services
             queryString.Append("]");
 
             return string.Concat(QUERY_BEGIN, queryString.ToString(), QUERY_ENDING);
-        }
-
-        private static void AddEventLogProviderNameCriteria(EventLogQueryCriteria eventLogQueryCriteria, List<string> criteriaList)
-        {
-            if (!string.IsNullOrWhiteSpace(eventLogQueryCriteria.ProviderName))
-            {
-                var crit = "(";
-                crit += string.Format("(Provider[@Name = '{0}'])", eventLogQueryCriteria.ProviderName);
-                crit += ")";
-                criteriaList.Add(crit);
-            }
         }
 
         #endregion Public Methods
@@ -98,11 +88,22 @@ namespace EventLogQueryToolCore.Services
             }
         }
 
+        private static void AddEventLogProviderNameCriteria(EventLogQueryCriteria eventLogQueryCriteria, List<string> criteriaList)
+        {
+            if (!string.IsNullOrWhiteSpace(eventLogQueryCriteria.ProviderName))
+            {
+                var crit = "(";
+                crit += string.Format("(Provider[@Name = '{0}'])", eventLogQueryCriteria.ProviderName);
+                crit += ")";
+                criteriaList.Add(crit);
+            }
+        }
         private static string ConvertDate(DateTime date)
         {
             return date.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffff0000Z");
         }
 
         #endregion Private Methods
+
     }
 }

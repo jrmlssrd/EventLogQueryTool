@@ -1,7 +1,7 @@
-﻿using EventLogQueryTool.ViewModel;
-using System.Windows;
+﻿using EventLogQueryTool.Model;
+using EventLogQueryTool.ViewModel;
 using System.Linq;
-using EventLogQueryTool.Model;
+using System.Windows;
 
 namespace EventLogQueryTool.Views
 {
@@ -10,6 +10,7 @@ namespace EventLogQueryTool.Views
     /// </summary>
     public partial class EventLogWindow : Window
     {
+
         #region Public Constructors
 
         public EventLogWindow()
@@ -19,10 +20,14 @@ namespace EventLogQueryTool.Views
 
         #endregion Public Constructors
 
+        #region Private Methods
+
         private void ListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var context = (EventLogViewModel)DataContext;
             context.SelectedCategories = categoryList.SelectedItems.Cast<ServerCategory>().ToList();
         }
+
+        #endregion Private Methods
     }
 }

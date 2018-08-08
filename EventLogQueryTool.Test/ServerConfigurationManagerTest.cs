@@ -9,6 +9,7 @@ namespace EventLogQueryTool.Test
     [TestClass]
     public class ServerConfigurationManagerTest
     {
+
         #region Private Fields
 
         private ServerConfigurationManager _manager;
@@ -100,5 +101,6 @@ namespace EventLogQueryTool.Test
         }
 
         #endregion Public Methods
+
     }
 }

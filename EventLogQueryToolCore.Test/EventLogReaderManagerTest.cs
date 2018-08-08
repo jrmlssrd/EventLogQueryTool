@@ -12,6 +12,7 @@ namespace EventLogQueryToolCore.Test
     [TestClass]
     public class EventLogReaderManagerTest
     {
+
         #region Private Fields
 
         private EventLogReaderManager eventLogReaderManager;
@@ -22,17 +23,6 @@ namespace EventLogQueryToolCore.Test
         #endregion Private Fields
 
         #region Public Methods
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            var exceptionManagerMock = new Mock<IExceptionManager>();
-            exceptionManagerMock.Setup(x => x.Raise(thrownException));
-            exceptionManager = exceptionManagerMock.Object;
-            eventLogReaderService = new EventLogReaderService(exceptionManager);
-            eventLogReaderManager = new EventLogReaderManager(eventLogReaderService, new EventLogCriteriaConverter());
-            thrownException = null;
-        }
 
         [TestMethod]
         public void CheckChargeOnLocalhost()
@@ -53,6 +43,17 @@ namespace EventLogQueryToolCore.Test
             r = eventLogReaderManager.ReadLogs(serversList, crit);
             r = r.OrderBy(x => x.TimeCreated).ToList();
             Assert.IsTrue(r.Any());
+        }
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            var exceptionManagerMock = new Mock<IExceptionManager>();
+            exceptionManagerMock.Setup(x => x.Raise(thrownException));
+            exceptionManager = exceptionManagerMock.Object;
+            eventLogReaderService = new EventLogReaderService(exceptionManager);
+            eventLogReaderManager = new EventLogReaderManager(eventLogReaderService, new EventLogCriteriaConverter());
+            thrownException = null;
         }
 
         #endregion Public Methods

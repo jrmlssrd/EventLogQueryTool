@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="EventLogWindow"
         DataContext="{Binding EventLogWindow, Source={StaticResource Locator}}">
-  
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

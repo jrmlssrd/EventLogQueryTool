@@ -6,6 +6,7 @@ namespace EventLogQueryTool.Model
     [Serializable]
     public class Event
     {
+
         #region Private Fields
 
         private EventRecord _eventRecord;
@@ -32,5 +33,6 @@ namespace EventLogQueryTool.Model
         }
 
         #endregion Public Properties
+
     }
 }

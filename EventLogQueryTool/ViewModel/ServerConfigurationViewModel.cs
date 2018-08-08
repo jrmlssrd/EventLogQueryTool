@@ -35,7 +35,9 @@ namespace EventLogQueryTool.ViewModel
         #region Public Properties
 
         public ICommand SaveConfigCommand { get; set; }
+
         public ICommand ExportCommand { get; set; }
+
         public ICommand ImportCommand { get; set; }
 
         public ServerConfiguration ServerConfiguration { get; set; }

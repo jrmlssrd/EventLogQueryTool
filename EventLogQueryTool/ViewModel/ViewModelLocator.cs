@@ -25,6 +25,7 @@ namespace EventLogQueryTool.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+
         #region Public Constructors
 
         static ViewModelLocator()
@@ -41,8 +42,6 @@ namespace EventLogQueryTool.ViewModel
 
         public EventLogViewModel EventLogWindow => ServiceLocator.Current.GetInstance<EventLogViewModel>();
 
-        public ServerConfigurationViewModel ServerConfigurationEditorWindow => ServiceLocator.Current.GetInstance<ServerConfigurationViewModel>();
-
         /// <summary>
         /// Gets the Main property.
         /// </summary>
@@ -50,6 +49,8 @@ namespace EventLogQueryTool.ViewModel
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public ServerConfigurationViewModel ServerConfigurationEditorWindow => ServiceLocator.Current.GetInstance<ServerConfigurationViewModel>();
 
         #endregion Public Properties
 
@@ -75,5 +76,6 @@ namespace EventLogQueryTool.ViewModel
         }
 
         #endregion Public Methods
+
     }
 }

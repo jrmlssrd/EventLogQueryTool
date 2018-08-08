@@ -7,6 +7,7 @@ namespace EventLogQueryToolCore.Services
 {
     public class EventLogReaderService : IEventLogReaderService
     {
+
         #region Private Fields
 
         private IExceptionManager _exceptionManager;
@@ -46,5 +47,6 @@ namespace EventLogQueryToolCore.Services
         }
 
         #endregion Public Methods
+
     }
 }

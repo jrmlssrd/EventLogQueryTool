@@ -7,6 +7,7 @@ namespace EventLogQueryTool.Bootstrap
 {
     public class AutofacModule : Module
     {
+
         #region Protected Methods
 
         protected override void Load(ContainerBuilder builder)
@@ -20,5 +21,6 @@ namespace EventLogQueryTool.Bootstrap
         }
 
         #endregion Protected Methods
+
     }
 }

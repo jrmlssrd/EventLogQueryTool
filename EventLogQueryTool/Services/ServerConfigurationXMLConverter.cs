@@ -6,6 +6,7 @@ namespace EventLogQueryTool.Services
 {
     public class ServerConfigurationXMLConverter : IServerConfigurationConverter
     {
+
         #region Public Methods
 
         public string FromObject(ServerConfiguration serverConfiguration)
@@ -26,5 +27,6 @@ namespace EventLogQueryTool.Services
         }
 
         #endregion Public Methods
+
     }
 }

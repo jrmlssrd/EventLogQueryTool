@@ -5,6 +5,7 @@ namespace EventLogQueryTool.Services
 {
     public class ServerConfigurationManager : IServerConfigurationManager
     {
+
         #region Private Fields
 
         private const string APP_SETTING_KEY = "ServerConfiguration";
@@ -70,5 +71,6 @@ namespace EventLogQueryTool.Services
         }
 
         #endregion Public Methods
+
     }
 }
