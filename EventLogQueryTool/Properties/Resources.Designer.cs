@@ -19,7 +19,7 @@ namespace EventLogQueryTool.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -61,6 +61,72 @@ namespace EventLogQueryTool.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_cancel_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_cancel_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_error_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_error_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_info_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_info_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date/Time.
+        /// </summary>
+        public static string LBL_COL_DATE_TIME {
+            get {
+                return ResourceManager.GetString("LBL_COL_DATE_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string LBL_COL_DESC {
+            get {
+                return ResourceManager.GetString("LBL_COL_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Machine.
+        /// </summary>
+        public static string LBL_COL_MACHINE_NAME {
+            get {
+                return ResourceManager.GetString("LBL_COL_MACHINE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source.
+        /// </summary>
+        public static string LBL_COL_SOURCE {
+            get {
+                return ResourceManager.GetString("LBL_COL_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à From.
         /// </summary>
         public static string LBL_DATAFROM {
@@ -79,6 +145,15 @@ namespace EventLogQueryTool.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Entry type.
+        /// </summary>
+        public static string LBL_ENTRY_TYPE {
+            get {
+                return ResourceManager.GetString("LBL_ENTRY_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Search.
         /// </summary>
         public static string LBL_SEARCH {
@@ -88,11 +163,20 @@ namespace EventLogQueryTool.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Servers selection.
+        ///   Recherche une chaîne localisée semblable à Servers categories selection.
         /// </summary>
         public static string LBL_SERVER_SELECTION {
             get {
                 return ResourceManager.GetString("LBL_SERVER_SELECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sources (seperated by &apos;;&apos;).
+        /// </summary>
+        public static string LBL_SOURCE {
+            get {
+                return ResourceManager.GetString("LBL_SOURCE", resourceCulture);
             }
         }
     }

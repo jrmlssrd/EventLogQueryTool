@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -112,12 +113,13 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrap\AutofacModule.cs" />
     <Compile Include="Common\EnumBindingSourceExtension.cs" />
+    <Compile Include="Converter\EntryLevelConverter.cs" />
     <Compile Include="Model\Event\Event.cs" />
     <Compile Include="Model\ServerConfiguration\ServerConfiguration.cs" />
     <Compile Include="Model\ServerConfiguration\Server.cs" />
     <Compile Include="Model\ServerConfiguration\ServerCategory.cs" />
-    <Compile Include="Properties\Resources.fr-CA.Designer.cs">
-      <DependentUpon>Resources.fr-CA.resx</DependentUpon>
+    <Compile Include="Properties\Resources.fr.Designer.cs">
+      <DependentUpon>Resources.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -140,6 +142,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\EventDetailWindow.xaml.cs">
+      <DependentUpon>EventDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ServerConfigurationEditor.xaml.cs">
       <DependentUpon>ServerConfigurationEditor.xaml</DependentUpon>
     </Compile>
@@ -154,6 +159,10 @@
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EventDetailWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ServerConfigurationEditor.xaml">
       <SubType>Designer</SubType>
@@ -174,9 +183,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.fr-CA.resx">
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr-CA.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -192,9 +201,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EventLogQueryToolCore\EventLogQueryToolCore.csproj">
       <Project>{80f6c622-177d-41e9-a25d-e995f2d342f4}</Project>
@@ -212,6 +219,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-cancel-20.png" />
+    <Resource Include="Resources\icons8-error-20.png" />
+    <Resource Include="Resources\icons8-info-20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

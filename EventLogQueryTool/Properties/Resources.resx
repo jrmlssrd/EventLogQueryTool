@@ -117,16 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icons8_cancel_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-cancel-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_error_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-error-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_info_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-info-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LBL_COL_DATE_TIME" xml:space="preserve">
+    <value>Date/Time</value>
+  </data>
+  <data name="LBL_COL_DESC" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LBL_COL_MACHINE_NAME" xml:space="preserve">
+    <value>Machine</value>
+  </data>
+  <data name="LBL_COL_SOURCE" xml:space="preserve">
+    <value>Source</value>
+  </data>
   <data name="LBL_DATAFROM" xml:space="preserve">
     <value>From</value>
   </data>
   <data name="LBL_DATATO" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="LBL_ENTRY_TYPE" xml:space="preserve">
+    <value>Entry type</value>
+  </data>
   <data name="LBL_SEARCH" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="LBL_SERVER_SELECTION" xml:space="preserve">
-    <value>Servers selection</value>
+    <value>Servers categories selection</value>
+  </data>
+  <data name="LBL_SOURCE" xml:space="preserve">
+    <value>Sources (seperated by ';')</value>
   </data>
 </root>

@@ -90,10 +90,15 @@ namespace EventLogQueryToolCore.Services
 
         private static void AddEventLogProviderNameCriteria(EventLogQueryCriteria eventLogQueryCriteria, List<string> criteriaList)
         {
-            if (!string.IsNullOrWhiteSpace(eventLogQueryCriteria.ProviderName))
+            if (eventLogQueryCriteria.ProvidersName.Any())
             {
                 var crit = "(";
-                crit += string.Format("(Provider[@Name = '{0}'])", eventLogQueryCriteria.ProviderName);
+                var listProviderCriteria = new List<string>();
+                foreach (var provider in eventLogQueryCriteria.ProvidersName)
+                {
+                    listProviderCriteria.Add(string.Format("(Provider[@Name = '{0}'])", provider));
+                }
+                crit += string.Join(OR, listProviderCriteria);
                 crit += ")";
                 criteriaList.Add(crit);
             }

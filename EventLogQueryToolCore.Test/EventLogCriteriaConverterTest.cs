@@ -49,13 +49,25 @@ namespace EventLogQueryToolCore.Test
         }
 
         [TestMethod]
-        public void ProviderOnly()
+        public void OneProviderOnly()
         {
             var criteria = new EventLogQueryCriteria();
-            criteria.ProviderName = "RFP";
+            criteria.ProvidersName.Add("TTT");
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
             var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
         }
+        [TestMethod]
+        public void MultipleProviders()
+        {
+            var criteria = new EventLogQueryCriteria();
+            criteria.ProvidersName.Add("TTT");
+            criteria.ProvidersName.Add("PPP");
+            criteria.ProvidersName.Add("RRR");
+            var queryString = _eventLogCriteriaConverter.Convert(criteria);
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+        }
+
+
 
         [TestInitialize]
         public void TestInit()

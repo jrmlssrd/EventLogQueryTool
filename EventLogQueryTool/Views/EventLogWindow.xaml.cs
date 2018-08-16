@@ -2,6 +2,7 @@
 using EventLogQueryTool.ViewModel;
 using System.Linq;
 using System.Windows;
+using Xceed.Wpf.DataGrid;
 
 namespace EventLogQueryTool.Views
 {
@@ -29,5 +30,17 @@ namespace EventLogQueryTool.Views
         }
 
         #endregion Private Methods
+
+        private void DataGridControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var g = (DataGridControl)sender;
+            if (g.SelectedItem!=null)
+            {
+                var w = new EventDetailWindow();
+                w.DataContext = g.SelectedItem;
+                w.Show();
+            }
+            
+        }
     }
 }

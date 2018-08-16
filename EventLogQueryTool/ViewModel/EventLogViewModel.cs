@@ -16,7 +16,6 @@ namespace EventLogQueryTool.ViewModel
 {
     public class EventLogViewModel : ViewModelBase
     {
-
         #region Private Fields
 
         private readonly IEventLogReaderManager _eventLogReaderManager;
@@ -29,7 +28,6 @@ namespace EventLogQueryTool.ViewModel
         private ICommand _editConfigCommand;
         private string _providerName;
         private ICommand _searchCommand;
-
         private ObservableCollection<EventLogEntryLevel> _selectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
 
         #endregion Private Fields
@@ -137,14 +135,21 @@ namespace EventLogQueryTool.ViewModel
         {
             ServerConfigurationEditor editor = new Views.ServerConfigurationEditor();
             editor.ShowDialog();
-            InitViewModelData();
+
+            ServerConfiguration = _serverConfigurationManager.LoadConfiguration();
+            if (ServerConfiguration == null)
+            {
+                _serverConfigurationManager.InitializeConfiguration();
+                ServerConfiguration = _serverConfigurationManager.LoadConfiguration();
+            }
+            RaisePropertyChanged("ServerConfiguration");
         }
 
         public void ExecuteSearch()
         {
             var crit = new EventLogQueryCriteria()
             {
-                ProviderName = ProviderName,
+                ProvidersName = string.IsNullOrWhiteSpace(ProviderName) ? new List<string>() : ProviderName.Split(';').ToList(),
                 DateFrom = DateFrom,
                 DateTo = DateTo,
                 EventLogEntryTypeList = SelectedEntryTypeList
@@ -178,7 +183,6 @@ namespace EventLogQueryTool.ViewModel
             SelectedEntryTypeList.Add(EventLogEntryLevel.Error);
             SelectedEntryTypeList.Add(EventLogEntryLevel.Warning);
             SelectedEntryTypeList.Add(EventLogEntryLevel.Information);
-            RaisePropertyChanged("SelectedEntryTypeList");
 
             // Initialize current server configuration
             ServerConfiguration = _serverConfigurationManager.LoadConfiguration();
@@ -194,6 +198,5 @@ namespace EventLogQueryTool.ViewModel
         }
 
         #endregion Private Methods
-
     }
 }

@@ -11,55 +11,76 @@
         mc:Ignorable="d"
         Title="EventLogWindow"
         DataContext="{Binding EventLogWindow, Source={StaticResource Locator}}">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <GroupBox Header="Search criteria" MinWidth="180">
-            <StackPanel Orientation="Vertical">
+    <ewt:BusyIndicator IsBusy="{Binding IsLoading, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" BusyContent="Loading...">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Search criteria" MinWidth="180">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="{x:Static lbl:Resources.LBL_DATAFROM}" />
-                    <ewt:DateTimePicker Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="{x:Static lbl:Resources.LBL_DATATO}" />
-                    <ewt:DateTimePicker Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Entry type</Label>
-                    <ewt:CheckComboBox ItemsSource="{Binding Source={com:EnumBindingSource {x:Type mod:EventLogEntryLevel}}}"
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_DATAFROM}" />
+                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd hh:mm" Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_DATATO}" />
+                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd hh:mm" Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_ENTRY_TYPE}"/> 
+                        <ewt:CheckComboBox ItemsSource="{Binding Source={com:EnumBindingSource {x:Type mod:EventLogEntryLevel}}}"
                                        SelectedItemsOverride="{Binding SelectedEntryTypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_SOURCE}"/>
+                        <TextBox Text="{Binding ProviderName}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">
+                            <StackPanel Orientation="Vertical">
+                                <ListBox x:Name="categoryList" ItemsSource="{Binding ServerConfiguration.CategoryList}" DisplayMemberPath="CategoryName" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Multiple" Height="150" />
+                                <Button Content="Edit configuration" Command="{Binding EditConfigCommand}" />
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Source</Label>
-                    <TextBox Text="{Binding ProviderName}" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">
-                        <StackPanel Orientation="Vertical">
-                            <Label>Selected servers</Label>
-                            <ListBox x:Name="categoryList" ItemsSource="{Binding ServerConfiguration.CategoryList}" DisplayMemberPath="CategoryName" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Multiple" Height="150" />
-                            <Button Content="Edit configuration" Command="{Binding EditConfigCommand}" />
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}"></Button>
-        <ewtg:DataGridControl Grid.Column="1" Grid.RowSpan="2" AutoCreateColumns="False" ItemsSource="{Binding EventResultList, UpdateSourceTrigger=PropertyChanged}">
-            <ewtg:DataGridControl.Columns>
-                <ewtg:Column Title="Level" FieldName="EventRecord.LevelDisplayName" />
-                <ewtg:Column Title="Machine" FieldName="EventRecord.MachineName" />
-                <ewtg:Column Title="Time" FieldName="EventRecord.TimeCreated" />
-                <ewtg:Column Title="Source" FieldName="EventRecord.ProviderName" />
-                <ewtg:Column Title="Description" FieldName="Description" />
-            </ewtg:DataGridControl.Columns>
-        </ewtg:DataGridControl>
-    </Grid>
+            </GroupBox>
+            <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}"></Button>
+            <ewtg:DataGridControl Grid.Column="1" Grid.RowSpan="2" AutoCreateColumns="False" MouseDoubleClick="DataGridControl_MouseDoubleClick" Width="Auto" ClipToBounds="True" ItemsSource="{Binding EventResultList, UpdateSourceTrigger=PropertyChanged}">
+                <ewtg:DataGridControl.Columns>
+                    <ewtg:Column Title="Type" Width="35" FieldName="EventRecord.LevelDisplayName">
+                        <ewtg:Column.CellContentTemplate>
+                            <DataTemplate>
+                                <Image x:Name="img" Source="/EventLogQueryTool;component/Resources/icons8-info-20.png" Stretch="None" />
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding}" Value="Warning">
+                                        <Setter TargetName="img" Property="Source" Value="/EventLogQueryTool;component/Resources/icons8-error-20.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding}" Value="Avertissement">
+                                        <Setter TargetName="img" Property="Source" Value="/EventLogQueryTool;component/Resources/icons8-error-20.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding}" Value="Erreur">
+                                        <Setter TargetName="img" Property="Source" Value="/EventLogQueryTool;component/Resources/icons8-cancel-20.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding}" Value="Error">
+                                        <Setter TargetName="img" Property="Source" Value="/EventLogQueryTool;component/Resources/icons8-cancel-20.png" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ewtg:Column.CellContentTemplate>
+
+                    </ewtg:Column>
+                    <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_MACHINE_NAME}" Width="90" FieldName="MachineName" />
+                    <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_DATE_TIME}" FieldName="EventRecord.TimeCreated" />
+                    <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_SOURCE}" FieldName="EventRecord.ProviderName" />
+                    <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_DESC}" FieldName="Description" Width="*" />
+                </ewtg:DataGridControl.Columns>
+            </ewtg:DataGridControl>
+        </Grid>
+    </ewt:BusyIndicator>
 </Window>

@@ -15,6 +15,7 @@ namespace EventLogQueryToolCore.Model
         {
             ServersList = new List<string>();
             EventLogEntryTypeList = new List<EventLogEntryLevel>();
+            ProvidersName = new List<string>();
         }
 
         #endregion Public Constructors
@@ -27,7 +28,7 @@ namespace EventLogQueryToolCore.Model
 
         public IList<EventLogEntryLevel> EventLogEntryTypeList { get; set; }
 
-        public string ProviderName { get; set; }
+        public IList<string> ProvidersName { get; set; }
 
         public IList<string> ServersList { get; set; }
 
