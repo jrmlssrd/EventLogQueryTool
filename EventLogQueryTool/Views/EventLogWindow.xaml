@@ -25,11 +25,11 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
                         <Label Content="{x:Static lbl:Resources.LBL_DATAFROM}" />
-                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd hh:mm" Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
+                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="{x:Static lbl:Resources.LBL_DATATO}" />
-                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd hh:mm" Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
+                        <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="{x:Static lbl:Resources.LBL_ENTRY_TYPE}"/> 
@@ -39,6 +39,10 @@
                     <StackPanel Orientation="Vertical">
                         <Label Content="{x:Static lbl:Resources.LBL_SOURCE}"/>
                         <TextBox Text="{Binding ProviderName}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_CONTAINS}"/>
+                        <TextBox Text="{Binding Contains}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">

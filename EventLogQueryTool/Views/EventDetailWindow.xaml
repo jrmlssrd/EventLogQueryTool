@@ -7,7 +7,8 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Event Detail"
-        Width="300"
+        WindowStyle="ToolWindow"
+        Width="700"
         Height="300">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,11 +19,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <xctk:PropertyGrid  Grid.ColumnSpan="2" Width="Auto"
-                            Margin="10"
-                            AutoGenerateProperties="True"
-                            IsReadOnly="True"
-                            SelectedObject="{Binding EventRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Grid.ColumnSpan="2"/>
         <Button Grid.Row="2" Grid.ColumnSpan="2"  Content="Close" IsCancel="True" />
     </Grid>
 </Window>

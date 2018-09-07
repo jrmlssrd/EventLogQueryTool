@@ -27,6 +27,7 @@ namespace EventLogQueryTool.ViewModel
 
         private ICommand _editConfigCommand;
         private string _providerName;
+        private string _contains;
         private ICommand _searchCommand;
         private ObservableCollection<EventLogEntryLevel> _selectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
 
@@ -103,6 +104,19 @@ namespace EventLogQueryTool.ViewModel
             }
         }
 
+        public string Contains
+        {
+            get
+            {
+                return _contains;
+            }
+            set
+            {
+                _contains = value;
+                RaisePropertyChanged("Contains");
+            }
+        }
+
         public ICommand SearchCommand
         {
             get { return _searchCommand; }
@@ -152,7 +166,9 @@ namespace EventLogQueryTool.ViewModel
                 ProvidersName = string.IsNullOrWhiteSpace(ProviderName) ? new List<string>() : ProviderName.Split(';').ToList(),
                 DateFrom = DateFrom,
                 DateTo = DateTo,
-                EventLogEntryTypeList = SelectedEntryTypeList
+                EventLogEntryTypeList = SelectedEntryTypeList,
+                DescriptionContains=Contains
+                
             };
 
             if (SelectedCategories != null && SelectedCategories.Any())

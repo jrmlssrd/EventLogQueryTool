@@ -129,6 +129,9 @@
   <data name="LBL_COL_SOURCE" xml:space="preserve">
     <value>Source</value>
   </data>
+  <data name="LBL_CONTAINS" xml:space="preserve">
+    <value>Contient</value>
+  </data>
   <data name="LBL_DATAFROM" xml:space="preserve">
     <value>Entre</value>
   </data>

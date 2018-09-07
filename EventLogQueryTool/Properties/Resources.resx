@@ -157,4 +157,7 @@
   <data name="LBL_SOURCE" xml:space="preserve">
     <value>Sources (seperated by ';')</value>
   </data>
+  <data name="LBL_CONTAINS" xml:space="preserve">
+    <value>Contains</value>
+  </data>
 </root>

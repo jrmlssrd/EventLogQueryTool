@@ -1,4 +1,5 @@
 ﻿using EventLogQueryToolCore.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -41,6 +42,10 @@ namespace EventLogQueryToolCore.Services
 
             threadList.ForEach(x => x.Join());
 
+            if (!string.IsNullOrEmpty(criteria.DescriptionContains))
+            {
+                returnList = returnList.Where(x => x.FormatDescription().IndexOf(criteria.DescriptionContains, 0, StringComparison.CurrentCultureIgnoreCase) != -1).ToList();
+            }
             returnList = returnList.OrderBy(x => x.TimeCreated).ToList();
 
             return returnList;
