@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,24 +17,26 @@ namespace EventLogQueryTool.ViewModel
 {
     public class EventLogViewModel : ViewModelBase
     {
+
         #region Private Fields
 
         private readonly IEventLogReaderManager _eventLogReaderManager;
         private readonly IServerConfigurationManager _serverConfigurationManager;
 
+        private string _contains = string.Empty;
         private DateTime? _dateFrom;
 
         private DateTime? _dateTo;
 
         private ICommand _editConfigCommand;
+        private string _manualServers = string.Empty;
         private string _providerName;
-        private string _contains;
         private ICommand _searchCommand;
         private ObservableCollection<EventLogEntryLevel> _selectedEntryTypeList = new ObservableCollection<EventLogEntryLevel>();
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Public Constructeurs
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -49,9 +52,22 @@ namespace EventLogQueryTool.ViewModel
             _editConfigCommand = new RelayCommand(ExecuteEditConfig);
         }
 
-        #endregion Public Constructors
+        #endregion Public Constructeurs
 
         #region Public Properties
+
+        public string Contains
+        {
+            get
+            {
+                return _contains;
+            }
+            set
+            {
+                _contains = value;
+                RaisePropertyChanged("Contains");
+            }
+        }
 
         public DateTime? DateFrom
         {
@@ -89,6 +105,19 @@ namespace EventLogQueryTool.ViewModel
 
         public ObservableCollection<Event> EventResultList { get; set; } = new ObservableCollection<Event>();
 
+        public string ManualServers
+        {
+            get
+            {
+                return _manualServers;
+            }
+            set
+            {
+                _manualServers = value;
+                RaisePropertyChanged("ManualServers");
+            }
+        }
+
         public ICommand OpenEventLogCommand { get; set; }
 
         public string ProviderName
@@ -101,19 +130,6 @@ namespace EventLogQueryTool.ViewModel
             {
                 _providerName = value;
                 RaisePropertyChanged("ProviderName");
-            }
-        }
-
-        public string Contains
-        {
-            get
-            {
-                return _contains;
-            }
-            set
-            {
-                _contains = value;
-                RaisePropertyChanged("Contains");
             }
         }
 
@@ -167,13 +183,22 @@ namespace EventLogQueryTool.ViewModel
                 DateFrom = DateFrom,
                 DateTo = DateTo,
                 EventLogEntryTypeList = SelectedEntryTypeList,
-                DescriptionContains=Contains
-                
+                DescriptionContains = string.IsNullOrWhiteSpace(Contains) ? new List<string>() : Contains.Split(';').ToList()
             };
 
+            List<string> serversList = new List<string>();
             if (SelectedCategories != null && SelectedCategories.Any())
             {
-                var logs = _eventLogReaderManager.ReadLogs(SelectedCategories.SelectMany(x => x.ServerList).Select(x => x.Name).ToArray(), crit);
+                serversList.AddRange(SelectedCategories.SelectMany(x => x.ServerList).Select(x => x.Name));
+            }
+            if (!string.IsNullOrEmpty(ManualServers))
+            {
+                serversList.AddRange(ManageManualServerList(ManualServers));
+            }
+
+            if (serversList.Any())
+            {
+                var logs = _eventLogReaderManager.ReadLogs(serversList, crit);
 
                 if (logs != null && logs.Any())
                 {
@@ -185,6 +210,10 @@ namespace EventLogQueryTool.ViewModel
                     MessageBox.Show("No events found with the current criteria");
                 }
                 RaisePropertyChanged("EventResultList");
+            }
+            else
+            {
+                MessageBox.Show("No servers has been selected!");
             }
         }
 
@@ -213,6 +242,58 @@ namespace EventLogQueryTool.ViewModel
             DateFrom = DateTime.Now.AddHours(-24);
         }
 
+        /// <summary>
+        /// Manager manual server list to check if server are actually reachable.
+        /// </summary>
+        /// <param name="manualServers">Server list as a string with semi-colon to split them</param>
+        /// <returns>List of reachable servers</returns>
+        private List<string> ManageManualServerList(string manualServers)
+        {
+            var initialManualServerList = manualServers.Split(';').ToList();
+            var manualServerList = manualServers.Split(';').ToList();
+            string msg = string.Empty;
+            foreach (var server in initialManualServerList)
+            {
+                if (!ReachServer(server))
+                {
+                    msg += string.Format("The server {0} cannot be reach!", server.ToUpper()) + Environment.NewLine;
+                    manualServerList.Remove(server);
+                }
+            }
+            if (!string.IsNullOrEmpty(msg))
+            {
+                MessageBox.Show(msg);
+            }
+            return manualServerList;
+        }
+
+        private bool ReachServer(string server)
+        {
+            bool pingable = false;
+            Ping pinger = null;
+
+            try
+            {
+                pinger = new Ping();
+                PingReply reply = pinger.Send(server);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                // Discard PingExceptions and return false;
+            }
+            finally
+            {
+                if (pinger != null)
+                {
+                    pinger.Dispose();
+                }
+            }
+
+            return pingable;
+        }
+
         #endregion Private Methods
+
     }
 }

@@ -24,6 +24,11 @@
             <GroupBox Header="Search criteria" MinWidth="180">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static lbl:Resources.LBL_ENTRY_TYPE}" />
+                        <ewt:CheckComboBox ItemsSource="{Binding Source={com:EnumBindingSource {x:Type mod:EventLogEntryLevel}}}"
+                                       SelectedItemsOverride="{Binding SelectedEntryTypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
                         <Label Content="{x:Static lbl:Resources.LBL_DATAFROM}" />
                         <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
@@ -32,29 +37,30 @@
                         <ewt:DateTimePicker Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{x:Static lbl:Resources.LBL_ENTRY_TYPE}"/> 
-                        <ewt:CheckComboBox ItemsSource="{Binding Source={com:EnumBindingSource {x:Type mod:EventLogEntryLevel}}}"
-                                       SelectedItemsOverride="{Binding SelectedEntryTypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="{x:Static lbl:Resources.LBL_SOURCE}"/>
+                        <Label Content="{x:Static lbl:Resources.LBL_SOURCE}" />
                         <TextBox Text="{Binding ProviderName}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{x:Static lbl:Resources.LBL_CONTAINS}"/>
+                        <Label Content="{x:Static lbl:Resources.LBL_CONTAINS}" />
                         <TextBox Text="{Binding Contains}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <GroupBox Header="{x:Static lbl:Resources.LBL_SERVER_SELECTION}">
                             <StackPanel Orientation="Vertical">
-                                <ListBox x:Name="categoryList" ItemsSource="{Binding ServerConfiguration.CategoryList}" DisplayMemberPath="CategoryName" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Multiple" Height="150" />
-                                <Button Content="Edit configuration" Command="{Binding EditConfigCommand}" />
+                                <StackPanel Orientation="Vertical">
+                                    <ListBox x:Name="categoryList" ItemsSource="{Binding ServerConfiguration.CategoryList}" DisplayMemberPath="CategoryName" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Multiple" Height="200" />
+                                    <Button Content="Edit configuration" Command="{Binding EditConfigCommand}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="{x:Static lbl:Resources.LBL_MANUAL_SERVERS}" />
+                                    <TextBox Text="{Binding ManualServers}" />
+                                </StackPanel>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}"></Button>
+            <Button Grid.Row="2" Command="{Binding SearchCommand}" Content="{x:Static lbl:Resources.LBL_SEARCH}" IsDefault="True"></Button>
             <ewtg:DataGridControl Grid.Column="1" Grid.RowSpan="2" AutoCreateColumns="False" MouseDoubleClick="DataGridControl_MouseDoubleClick" Width="Auto" ClipToBounds="True" ItemsSource="{Binding EventResultList, UpdateSourceTrigger=PropertyChanged}">
                 <ewtg:DataGridControl.Columns>
                     <ewtg:Column Title="Type" Width="35" FieldName="EventRecord.LevelDisplayName">
@@ -77,7 +83,6 @@
                                 </DataTemplate.Triggers>
                             </DataTemplate>
                         </ewtg:Column.CellContentTemplate>
-
                     </ewtg:Column>
                     <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_MACHINE_NAME}" Width="90" FieldName="MachineName" />
                     <ewtg:Column Title="{x:Static lbl:Resources.LBL_COL_DATE_TIME}" FieldName="EventRecord.TimeCreated" />

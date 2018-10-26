@@ -41,7 +41,7 @@ namespace EventLogQueryToolCore.Test
                          "    </Select>" +
                          "  </Query>" +
                          "</QueryList>";
-            var r = eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, query));
+            var r = eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, query),null);
             Assert.IsNotNull(thrownException);
         }
 

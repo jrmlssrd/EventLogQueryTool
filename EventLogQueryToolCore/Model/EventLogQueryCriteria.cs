@@ -8,7 +8,8 @@ namespace EventLogQueryToolCore.Model
     /// </summary>
     public class EventLogQueryCriteria
     {
-        #region Public Constructors
+
+        #region Public Constructeurs
 
         public EventLogQueryCriteria()
         {
@@ -17,7 +18,7 @@ namespace EventLogQueryToolCore.Model
             ProvidersName = new List<string>();
         }
 
-        #endregion Public Constructors
+        #endregion Public Constructeurs
 
         #region Public Properties
 
@@ -25,14 +26,14 @@ namespace EventLogQueryToolCore.Model
 
         public DateTime? DateTo { get; set; }
 
+        public IList<string> DescriptionContains { get; set; }
+
         public IList<EventLogEntryLevel> EventLogEntryTypeList { get; set; }
 
         public IList<string> ProvidersName { get; set; }
-
-        public string DescriptionContains { get; set; }
-
         public IList<string> ServersList { get; set; }
 
         #endregion Public Properties
+
     }
 }

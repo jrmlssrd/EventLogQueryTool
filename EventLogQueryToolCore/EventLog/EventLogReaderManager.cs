@@ -33,19 +33,15 @@ namespace EventLogQueryToolCore.Services
             EventLogQuery query = new EventLogQuery("Application", PathType.LogName, _eventLogCriteriaConverter.Convert(criteria));
             List<EventRecord> returnList = new List<EventRecord>();
             List<Thread> threadList = new List<Thread>();
-            foreach (var server in serversList)
+            foreach (var server in serversList.Distinct())
             {
-                var t = new Thread(() => returnList.AddRange(_eventLogReaderService.ReadLogs(server, query)));
+                var t = new Thread(() => returnList.AddRange(_eventLogReaderService.ReadLogs(server, query, criteria.DescriptionContains)));
                 t.Start();
                 threadList.Add(t);
             }
 
             threadList.ForEach(x => x.Join());
 
-            if (!string.IsNullOrEmpty(criteria.DescriptionContains))
-            {
-                returnList = returnList.Where(x => x.FormatDescription().IndexOf(criteria.DescriptionContains, 0, StringComparison.CurrentCultureIgnoreCase) != -1).ToList();
-            }
             returnList = returnList.OrderBy(x => x.TimeCreated).ToList();
 
             return returnList;

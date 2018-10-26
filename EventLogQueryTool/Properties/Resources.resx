@@ -158,6 +158,9 @@
     <value>Sources (seperated by ';')</value>
   </data>
   <data name="LBL_CONTAINS" xml:space="preserve">
-    <value>Contains</value>
+    <value>Message contains</value>
+  </data>
+  <data name="LBL_MANUAL_SERVERS" xml:space="preserve">
+    <value>Servers (seperated by ';')</value>
   </data>
 </root>

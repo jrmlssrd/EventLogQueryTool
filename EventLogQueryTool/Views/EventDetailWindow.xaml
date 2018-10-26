@@ -19,7 +19,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Grid.ColumnSpan="2"/>
-        <Button Grid.Row="2" Grid.ColumnSpan="2"  Content="Close" IsCancel="True" />
+        <TextBox TextWrapping="Wrap" Text="{Binding Description, Mode=OneWay}" Grid.ColumnSpan="2" IsReadOnly="True"/>
+        <Button Grid.Row="2" Grid.ColumnSpan="2"  Content="Close" IsCancel="True" Click="Button_Click" />
     </Grid>
 </Window>

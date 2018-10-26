@@ -130,7 +130,7 @@
     <value>Source</value>
   </data>
   <data name="LBL_CONTAINS" xml:space="preserve">
-    <value>Contient</value>
+    <value>Message contient</value>
   </data>
   <data name="LBL_DATAFROM" xml:space="preserve">
     <value>Entre</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="LBL_ENTRY_TYPE" xml:space="preserve">
     <value>Type de message</value>
+  </data>
+  <data name="LBL_MANUAL_SERVERS" xml:space="preserve">
+    <value>Serveurs (séparé par ';')</value>
   </data>
   <data name="LBL_SEARCH" xml:space="preserve">
     <value>Rechercher</value>

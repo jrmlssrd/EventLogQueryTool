@@ -27,7 +27,7 @@ namespace EventLogQueryToolCore.Test
             criteria.EventLogEntryTypeList.Add(EventLogEntryLevel.Information);
             criteria.DateFrom = DateTime.Now.AddMinutes(-10);
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
-            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString),null);
             Assert.IsTrue(r.All(x => x.TimeCreated >= criteria.DateFrom));
         }
 
@@ -37,7 +37,7 @@ namespace EventLogQueryToolCore.Test
             var criteria = new EventLogQueryCriteria();
             criteria.EventLogEntryTypeList.Add(EventLogEntryLevel.Information);
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
-            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString), null);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace EventLogQueryToolCore.Test
         {
             var criteria = new EventLogQueryCriteria();
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
-            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString), null);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace EventLogQueryToolCore.Test
             var criteria = new EventLogQueryCriteria();
             criteria.ProvidersName.Add("TTT");
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
-            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString), null);
         }
         [TestMethod]
         public void MultipleProviders()
@@ -64,7 +64,7 @@ namespace EventLogQueryToolCore.Test
             criteria.ProvidersName.Add("PPP");
             criteria.ProvidersName.Add("RRR");
             var queryString = _eventLogCriteriaConverter.Convert(criteria);
-            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString));
+            var r = _eventLogReaderService.ReadLogs("localhost", new EventLogQuery("Application", PathType.LogName, queryString), null);
         }
 
 

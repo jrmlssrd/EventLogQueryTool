@@ -127,7 +127,7 @@ namespace EventLogQueryTool.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Contains.
+        ///   Recherche une chaîne localisée semblable à Message contains.
         /// </summary>
         public static string LBL_CONTAINS {
             get {
@@ -159,6 +159,15 @@ namespace EventLogQueryTool.Properties {
         public static string LBL_ENTRY_TYPE {
             get {
                 return ResourceManager.GetString("LBL_ENTRY_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Servers (seperated by &apos;;&apos;).
+        /// </summary>
+        public static string LBL_MANUAL_SERVERS {
+            get {
+                return ResourceManager.GetString("LBL_MANUAL_SERVERS", resourceCulture);
             }
         }
         

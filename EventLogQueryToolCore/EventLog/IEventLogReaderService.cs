@@ -7,7 +7,7 @@ namespace EventLogQueryToolCore.Services
     {
         #region Public Methods
 
-        IList<EventRecord> ReadLogs(string machine, EventLogQuery criteria);
+        IList<EventRecord> ReadLogs(string machine, EventLogQuery criteria, IList<string> contains);
 
         #endregion Public Methods
     }
